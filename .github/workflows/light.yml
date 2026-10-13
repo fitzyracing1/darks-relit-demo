@@ -1,0 +1,13 @@
+name: light
+on: [push]
+jobs:
+  light:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: read LIGHT
+        run: |
+          echo "LIGHT says: $(cat LIGHT)"
+          if [ "$(cat LIGHT)" = lit ]; then exit 0; fi
+          echo "::error file=LIGHT,line=1::LIGHT file says dark"
+          exit 1
